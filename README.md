@@ -1,5 +1,5 @@
 # Analysis of anchor screens
-<b>This script calculates residuals for an anchor arm compared to the control arm</b>  
+<b>This script calculates residuals for the anchor arm compared to the control arm</b>  
 <b>Author</b>: Mudra Hegde  
 <b>Email</b>: mhegde@broadinstitute.org
 <b>Version: 1.0 </b>  
@@ -7,6 +7,8 @@
 <b> Required packages </b>
 1. pandas <= 0.16.2
 2. statsmodels
+
+The code to run the hypergeometric analysis and relevant chip file should be in the current working directory. 
 
 <b>Inputs</b>
 1. <b>Input File: File with sgRNAs in first column, LFCs of control arm and anchor arms in following columns</b>
