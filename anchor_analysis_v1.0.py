@@ -49,7 +49,7 @@ def get_residuals(df,y,x):
 '''
 Runs hypergeometric code for sgRNA residuals of each anchor arm
 '''
-def run_hypergeom(input_df,chip,control):
+def run_hypergeom(input_df,chip,control,cwd):
     colnames = list(input_df.columns)[1:]
     colnames = [c for c in colnames if control not in c]
     lognorm_resid = pd.DataFrame({'sgRNA Sequence':input_df['Construct Barcode']})
@@ -57,7 +57,7 @@ def run_hypergeom(input_df,chip,control):
         col_resid = get_residuals(input_df,c,control)
         lognorm_resid[c] = col_resid[c]
     lognorm_resid.to_csv('temp_files/'+args.input_file.split('/')[-1][:-4]+'_residuals_volcanoinput.txt',sep='\t',index=False)
-    cmd = 'anapython hypergeom_2.3.1.py --input-file temp_files/'+args.input_file.split('/')[-1][:-4]+'_residuals_volcanoinput.txt --chip-file '+chip_file
+    cmd = 'anapython '+cwd+'/hypergeom_2.3.1.py --input-file temp_files/'+args.input_file.split('/')[-1][:-4]+'_residuals_volcanoinput.txt --chip-file '+cwd+'/'+chip_file
     print 'Running hypergeometric analysis on lfc sgRNA residuals..'
     os.system(cmd)
     sub_folders = os.listdir(os.curdir)
@@ -77,15 +77,15 @@ def setup_o_folder(outputfolder):
     new_cwd = os.getcwd()
     print 'In output folder: '+new_cwd
     os.system('mkdir temp_files')
-    return 1
+    return cwd
 
 if __name__ == '__main__':
     args = get_parser().parse_args()
     input_df = pd.read_table(args.input_file)
     chip_file = args.chip_file
     outputfolder = args.outputfolder
-    val = setup_o_folder(outputfolder)
+    cwd = setup_o_folder(outputfolder)
     print os.getcwd()
     control = args.control
-    val = run_hypergeom(input_df,chip_file,control)
+    val = run_hypergeom(input_df,chip_file,control,cwd)
 
