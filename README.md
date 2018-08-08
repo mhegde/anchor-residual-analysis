@@ -1,7 +1,7 @@
 # Analysis of anchor screens
 <b>This script calculates residuals for the anchor arm compared to the control arm</b>  
 <b>Author</b>: Mudra Hegde  
-<b>Email</b>: mhegde@broadinstitute.org
+<b>Email</b>: mhegde@broadinstitute.org 
 <b>Version: 1.0 </b>  
 
 <b> Required packages </b>
